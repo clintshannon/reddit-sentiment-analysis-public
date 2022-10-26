@@ -21,4 +21,29 @@ for submission in reddit.subreddit('datascience').new(limit=None):
     headlines.add(submission.title)
     display.clear_output()
 
-print(len(headlines))
+# print(len(headlines))
+
+from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
+
+# Use NLTK’s built-in Vader Sentiment Analyzer to rank a piece of text as positive,
+# negative or neutral using a lexicon of positive and negative words.
+
+sia = SIA()
+results = []
+
+# For each line in the headlines list, calculate and define the polarity score,
+# define pol_score under 'headline', and append the results to the results list.
+for line in headlines:
+    pol_score = sia.polarity_scores(line)
+    pol_score['headline'] = line
+    results.append(pol_score)
+
+# pprint(results[:3], width=100)
+
+df = pd.DataFrame.from_records(results)
+df.head(5)
+
+df['label'] = 0
+df.loc[df['compound'] > 0.2, 'label'] = 1
+df.loc[df['compound'] < -0.2, 'label'] = -1
+print(df.loc[df['label'] != 0].head(5))
