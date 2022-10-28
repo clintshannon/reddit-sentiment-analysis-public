@@ -15,11 +15,21 @@ reddit = praw.Reddit(client_id='TtaGbxrcEqrFPqjHoFyZig',
                      user_agent='sentiment-analysis')
 
 subreddit = reddit.subreddit("learnprogramming").top(limit=5, time_filter='week')
-post_id = set()
+# post_id = set()
+data = {}
 
 for submission in subreddit:
-    post_id.add(submission.id)
-    display.clear_output()
+    post_comments = set()
     submission.comments.replace_more(limit=None)
     for comment in submission.comments.list():
-        print(comment.body)
+        post_comments.add(comment.body)
+    post_id = submission.id
+    data[post_id] = post_comments
+    display.clear_output()
+
+s = pd.Series(data, name='Comments')
+s.index.name = 'Post ID'
+s.reset_index()
+
+print(s.head(5))
+
