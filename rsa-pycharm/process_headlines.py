@@ -63,12 +63,11 @@ tokenizer = RegexpTokenizer(r'\w+')
 from nltk.corpus import stopwords
 stop_words = stopwords.words('english')
 
+
 # Define a function to tokenize headlines and remove stopwords.
-
-
-def process_text(headlines):
+def process_text(text):
     tokens = []
-    for line in headlines:
+    for line in text:
         toks = tokenizer.tokenize(line)
         toks = [t.lower() for t in toks if t.lower() not in stop_words]
         tokens.extend(toks)
