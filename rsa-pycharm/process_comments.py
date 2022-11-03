@@ -6,15 +6,17 @@ import numpy as np
 import nltk
 import matplotlib.pyplot as plt
 import seaborn as sns
+from textblob import TextBlob
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 
 pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', 100)
 
 # Get data
 df = pd.read_csv('reddit-sentiment-data.csv')
-print(df.head(10))
+# print(df.head(10))
 
 # Define a function to tokenize headlines and remove stopwords
 sia = SIA()
@@ -33,17 +35,20 @@ def process_text(text):
 
 
 # Tokenize and remove stopwords from comments and titles
-comment_tok = list(df['comment'])
-comment_tok = process_text(comment_tok)
-title_tok = list(df['title'].drop_duplicates())
-title_tok = process_text(title_tok)
+# comment_tok = list(df['comment'])
+# comment_tok = process_text(comment_tok)
+blob = TextBlob(str(df['title'].drop_duplicates()))
+print(blob)
+for nouns in blob.noun_phrases:
+    print(nouns)
+title_tok = process_text(blob)
 
 
 # Get Freq Distributions
-comment_freq = nltk.FreqDist(comment_tok)
-print(comment_freq.most_common(10))
-title_freq = nltk.FreqDist(title_tok)
-print(title_freq.most_common(10))
+# comment_freq = nltk.FreqDist(comment_tok)
+# print(comment_freq.most_common(10))
+# title_freq = nltk.FreqDist(title_tok)
+# print(title_freq.most_common(10))
 
 
 # Use Vader Sentiment Analyzer to rank text as positive, negative, or neutral
