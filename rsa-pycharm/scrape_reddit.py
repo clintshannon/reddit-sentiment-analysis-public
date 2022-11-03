@@ -87,21 +87,23 @@ plt.savefig('sentiment_analysis.jpg', bbox_inches='tight')
 # comment_tok = list(sia_df['comment'])
 # comment_tok = process_text(comment_tok)
 # df['sentiment'] = df['text'].apply(lambda tweet: TextBlob(tweet).sentiment)
+freq = []
 blob = TextBlob(str(sub_dict['posts']['title']))
 for noun in blob.noun_phrases:
-    print(noun)
+    freq.append(noun)
 title_tok = list(sub_dict['posts']['title'])
 title_tok = str(process_text(title_tok))
 blob2 = TextBlob(title_tok)
-for more in blob2.noun_phrases:
-    print(more)
+# for more in blob2.noun_phrases:
+#     freq.append(more)
 
 # Get Freq Distributions
 # comment_freq = nltk.FreqDist(comment_tok)
 # print(comment_freq.most_common(10))
-title_freq = nltk.FreqDist(title_tok)
+# title_freq = nltk.FreqDist(title_tok)
+freq = nltk.FreqDist(freq)
 print("Common post themes:\n")
-print(title_freq.most_common(10))
+print(freq.most_common(10))
 
 # print(sia_df.head(5))
 
