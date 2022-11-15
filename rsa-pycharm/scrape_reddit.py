@@ -10,9 +10,9 @@ from nltk.corpus import stopwords
 pd.set_option('display.max_columns', None)
 
 # Create reddit client, define subreddit, and add NLP tools
-reddit = praw.Reddit(client_id='TtaGbxrcEqrFPqjHoFyZig',
-                     client_secret='ANwuNmen1-zv_7rZ-JJp7n7nx3bIGg',
-                     user_agent='sentiment-analysis')
+reddit = praw.Reddit(client_id='<reddit-client-id>',
+                     client_secret='reddit-client-secret',
+                     user_agent='app-name')
 subreddit = reddit.subreddit("Fantasy").top(limit=3, time_filter='week')
 sia = SIA()
 tokenizer = RegexpTokenizer(r'\w+')

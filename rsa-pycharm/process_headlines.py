@@ -10,9 +10,9 @@ import praw
 
 # Create a reddit client
 # Get info here https://www.reddit.com/prefs/apps/
-reddit = praw.Reddit(client_id='TtaGbxrcEqrFPqjHoFyZig',
-                     client_secret='ANwuNmen1-zv_7rZ-JJp7n7nx3bIGg',
-                     user_agent='sentiment-analysis')
+reddit = praw.Reddit(client_id='<reddit-client-id>',
+                     client_secret='reddit-client-secret',
+                     user_agent='app-name')
 
 # Define a set for headlines to avoid duplicates
 headlines = set()
