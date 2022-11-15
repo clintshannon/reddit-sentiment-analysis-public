@@ -7,4 +7,3 @@ Following [this tutorial](https://www.learndatasci.com/tutorials/sentiment-analy
 - Build a Reddit API app.
 - Import, process, and visualize Reddit data via python.
 - Store the data in a mysql db.
-- Visualize again via python, or R, or a BI tool.
